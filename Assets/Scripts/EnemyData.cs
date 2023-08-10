@@ -17,7 +17,7 @@ public class EnemyData : MonoBehaviour
     private float _attackSpeed;
 
     [SerializeField]
-    private float _attacRange;
+    public float _attackRange;                      //public in order to grant ManagerComponent Access. 
 
     [SerializeField]
     private float _movementSpeed;

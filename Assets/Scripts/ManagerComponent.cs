@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ManagerComponent : MonoBehaviour
 {
+
+    // Player Transform position for future enemy detection 
+    public Transform PlayerTransform;
+
     [SerializeField]
     private GameObject _orcPrefab;
 
@@ -41,7 +45,28 @@ public class ManagerComponent : MonoBehaviour
    
     void Update()
     {
-        
+        DistanceChecker();
+    }
+
+    void DistanceChecker()
+    {
+        foreach (GameObject enemy in _enemies)
+        {
+            float distanceToPlayer = Vector3.Distance(PlayerTransform.position, enemy.transform.position);
+            EnemyComponent enemyComponent = enemy.GetComponent<EnemyComponent>();
+
+            if (distanceToPlayer <= enemyComponent._attackRange)
+            {
+                //PrepareToShoot(enemy, enemyComponent);
+            }
+
+          
+        }
+    }
+
+    void PrepareToShoot(GameObject enemy, EnemyComponent enemyComponent)
+    {
+        //enemyComponent.ShootProjectile();
     }
 
     void EnemySpawner(Enums.EnemyType enemyType, int count)
