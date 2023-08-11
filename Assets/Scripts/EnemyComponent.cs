@@ -6,6 +6,6 @@ public class EnemyComponent : EnemyData
 {
     public void ShootProjectile()
     {
-
+       
     }
 }

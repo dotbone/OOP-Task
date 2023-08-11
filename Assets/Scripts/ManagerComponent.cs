@@ -8,6 +8,8 @@ public class ManagerComponent : MonoBehaviour
     // Player Transform position for future enemy detection 
     public Transform PlayerTransform;
 
+    [Header("Enemy Prefabs")]
+    
     [SerializeField]
     private GameObject _orcPrefab;
 
@@ -16,6 +18,17 @@ public class ManagerComponent : MonoBehaviour
 
     [SerializeField]
     private GameObject _goblinPrefab;
+
+    [Header("Projectile Prefabs")]
+     
+    [SerializeField]
+    private GameObject _arrowPrefab;
+
+    [SerializeField]
+    private GameObject _discPrefab;
+
+    [SerializeField]
+    private GameObject _stonePrefab;
 
 
     // Serializable count of how many enemies to spawn. 
@@ -30,11 +43,16 @@ public class ManagerComponent : MonoBehaviour
     [SerializeField]
     private int _goblinCount = 2;
 
+    public static ManagerComponent Instance;
+
     private List<GameObject> _enemies = new List<GameObject>();
 
-    
 
-    
+    private void Awake()
+    {
+     
+    }
+
     void Start()
     {
         EnemySpawner(Enums.EnemyType.Orc, _orcCount);
@@ -57,17 +75,14 @@ public class ManagerComponent : MonoBehaviour
 
             if (distanceToPlayer <= enemyComponent._attackRange)
             {
-                //PrepareToShoot(enemy, enemyComponent);
+                enemyComponent.ShootProjectile();
             }
 
           
         }
     }
 
-    void PrepareToShoot(GameObject enemy, EnemyComponent enemyComponent)
-    {
-        //enemyComponent.ShootProjectile();
-    }
+    
 
     void EnemySpawner(Enums.EnemyType enemyType, int count)
     {
@@ -94,6 +109,21 @@ public class ManagerComponent : MonoBehaviour
                 GameObject enemy = Instantiate(prefabsToSpawn, transform.position, Quaternion.identity);
                 _enemies.Add(enemy);
             }
+        }
+    }
+
+    public GameObject GetProjectilePrefab(Enums.ProjectileType projectileType)
+    {
+        switch (projectileType)
+        {
+            case Enums.ProjectileType.Arrow:
+                return _arrowPrefab;
+            case Enums.ProjectileType.Disc:
+                return _discPrefab;
+            case Enums.ProjectileType.Stone:
+                return _stonePrefab;
+            default:
+                return null;
         }
     }
 }

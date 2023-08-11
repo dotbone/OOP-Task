@@ -334,6 +334,9 @@ MonoBehaviour:
   _orcPrefab: {fileID: 4056897814174060433, guid: 909f0c06b89f1fd408ac2c21bdfe4753, type: 3}
   _trollPrefab: {fileID: 5656856607817763191, guid: 31d8b8b4905ae034d8c4383912d2e816, type: 3}
   _goblinPrefab: {fileID: 839601717042883214, guid: a099cf716ff3a83478475ac0907feece, type: 3}
+  _arrowPrefab: {fileID: 6023921580455516249, guid: 49cb301382a2b0148a56b92ecdf04794, type: 3}
+  _discPrefab: {fileID: 1533840972049251580, guid: 2ba3bac629a42e14da9790a54c1ba371, type: 3}
+  _stonePrefab: {fileID: 6859414948353323798, guid: facc4156beb22f34fb19649ee31abb33, type: 3}
   _orcCount: 2
   _trollCount: 2
   _goblinCount: 2
