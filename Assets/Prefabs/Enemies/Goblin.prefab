@@ -113,6 +113,6 @@ MonoBehaviour:
   enemyType: 2
   ProjectileType: 2
   _health: 700
-  _attackSpeed: 5
-  _attacRange: 5
+  <AttackSpeed>k__BackingField: 2
+  _attackRange: 5
   _movementSpeed: 7

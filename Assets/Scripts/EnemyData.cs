@@ -8,16 +8,16 @@ public class EnemyData : MonoBehaviour
     private Enums.EnemyType enemyType;
 
     [SerializeField]
-    private Enums.ProjectileType ProjectileType;
+    public Enums.ProjectileType ProjectileType;
 
     [SerializeField]
     private int _health;
 
-    [SerializeField]
-    private float _attackSpeed;
+    [field: SerializeField]
+    public float AttackSpeed { get; private set; }
 
     [SerializeField]
-    public float _attackRange;                      //public in order to grant ManagerComponent Access. 
+    public float _attackRange;                       
 
     [SerializeField]
     private float _movementSpeed;

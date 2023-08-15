@@ -45,13 +45,31 @@ public class ManagerComponent : MonoBehaviour
 
     public static ManagerComponent Instance;
 
+   
+    
     private List<GameObject> _enemies = new List<GameObject>();
+
+    [SerializeField]
+    List<GameObject> _projectiles = new();
+
+
+    bool _shoot;
+
+
 
 
     private void Awake()
     {
-     
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
+
 
     void Start()
     {
@@ -63,11 +81,16 @@ public class ManagerComponent : MonoBehaviour
    
     void Update()
     {
-        DistanceChecker();
+        if (_shoot != true)
+        {
+            DistanceChecker();
+        }
+
     }
 
     void DistanceChecker()
     {
+        Debug.Log("DistanceChecker called");
         foreach (GameObject enemy in _enemies)
         {
             float distanceToPlayer = Vector3.Distance(PlayerTransform.position, enemy.transform.position);
@@ -75,14 +98,29 @@ public class ManagerComponent : MonoBehaviour
 
             if (distanceToPlayer <= enemyComponent._attackRange)
             {
-                enemyComponent.ShootProjectile();
+                StartCoroutine(ShootDelay(enemyComponent.AttackSpeed)); 
+                HandleShooting(enemyComponent);
             }
 
           
         }
     }
 
-    
+    void HandleShooting(EnemyComponent enemyComponent)
+    {
+        Debug.Log("Shooting called");
+        GameObject projectilePrefab = GetProjectilePrefab(enemyComponent.ProjectileType);
+
+        if (projectilePrefab != null)
+        {
+            Vector3 spawnPosition = enemyComponent.transform.position + enemyComponent.transform.forward; 
+            GameObject newProjectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
+            _projectiles.Add(newProjectile);
+        }
+    }
+
+
+
 
     void EnemySpawner(Enums.EnemyType enemyType, int count)
     {
@@ -125,5 +163,13 @@ public class ManagerComponent : MonoBehaviour
             default:
                 return null;
         }
+    }
+
+    IEnumerator ShootDelay(float attackSpeed)
+    {
+        _shoot = true;
+        yield return new WaitForSeconds(attackSpeed);
+        _shoot = false;
+        
     }
 }

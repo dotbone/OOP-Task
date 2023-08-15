@@ -11,8 +11,8 @@ public class ProjectileData : MonoBehaviour
     private int _projectileDamage;
 
     [SerializeField]
-    private float _projectileSpeed;
+    protected float _projectileSpeed;
 
     [SerializeField]
-    private float _projectileLifeTime;
+    protected float _projectileLifeTime;
 }
